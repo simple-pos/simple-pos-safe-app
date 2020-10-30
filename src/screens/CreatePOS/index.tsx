@@ -8,7 +8,7 @@ import BonusPoolToken from "./BonusPoolToken"
 import SimplePOSToken from "./SimplePOSToken"
 import CurveCoefficient from "./CurveCoefficient"
 
-const Container = styled.form`
+const Container = styled.div`
   margin-bottom: 2rem;
   width: 100%;
   max-width: 480px;
@@ -19,19 +19,41 @@ const Container = styled.form`
   grid-row-gap: 1rem;
 `
 
+const SBackBtn = styled(BackButton)`
+  position: fixed;
+  top: 15px;
+  left: 15px;
+`
+
 type OwnProps = {
   back: () => void
 }
 
+const INITIAL_VALUES = {
+  curveCoefficient: "1",
+  sposTokenName: "",
+  sposTokenSymbol: "",
+  commission: "",
+  exchangeToken: "0xc7ad46e0b8a400bb3c915120d284aafba8fc4735",
+  initialRatio: "",
+  ethValue: "",
+} as const
+
+type CreatePOSFormValues = typeof INITIAL_VALUES
+
 const CreatePOS = ({ back }: OwnProps): React.ReactElement => {
+  const submitHandler = (val: CreatePOSFormValues): void => {
+    console.log(val)
+  }
+
   return (
     <Container>
-      <Wizard>
-        <BonusPoolToken></BonusPoolToken>
-        <SimplePOSToken></SimplePOSToken>
-        <CurveCoefficient></CurveCoefficient>
+      <Wizard<CreatePOSFormValues> onSubmit={submitHandler} initialValues={INITIAL_VALUES}>
+        <BonusPoolToken />
+        <SimplePOSToken />
+        <CurveCoefficient />
       </Wizard>
-      <BackButton onClick={back} />
+      <SBackBtn onClick={back} />
     </Container>
   )
 }

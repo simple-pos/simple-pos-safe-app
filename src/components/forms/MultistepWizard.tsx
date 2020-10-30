@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Form, Formik, FormikHelpers } from "formik"
+import styled from "styled-components"
 
 // Wizard is a single Formik instance whose children are each page of the
 // multi-step form. The form is submitted on each forward transition (can only
@@ -8,8 +9,17 @@ import { Form, Formik, FormikHelpers } from "formik"
 // transition. Each page has an optional submit handler, and the top-level
 // submit is called when the final page is submitted.
 
+const SForm = styled(Form)`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
+
 type OwnProps<V> = {
-  children: React.ReactChildren
+  children: React.ReactNode
   initialValues: V
   onSubmit: (values: V, bag: FormikHelpers<V>) => void | Promise<void>
 }
@@ -28,6 +38,7 @@ const Wizard = <V extends Record<string, unknown>>({
   const isLastStep = stepNumber === totalSteps - 1
 
   const next = (values: V) => {
+    console.log("next", { values })
     setSnapshot(values)
     setStepNumber(Math.min(stepNumber + 1, totalSteps - 1))
   }
@@ -51,13 +62,10 @@ const Wizard = <V extends Record<string, unknown>>({
   }
 
   return (
-    <Formik
-      initialValues={snapshot}
-      onSubmit={handleSubmit}
-      validationSchema={step.props.validationSchema}
-    >
+    <Formik initialValues={snapshot} onSubmit={handleSubmit}>
       {(formik) => (
-        <Form>
+        <SForm>
+          {console.log(formik)}
           <p>
             Step {stepNumber + 1} of {totalSteps}
           </p>
@@ -65,7 +73,7 @@ const Wizard = <V extends Record<string, unknown>>({
           <div style={{ display: "flex" }}>
             {stepNumber > 0 && (
               <button onClick={() => previous(formik.values)} type="button">
-                Back
+                Previous
               </button>
             )}
             <div>
@@ -74,14 +82,13 @@ const Wizard = <V extends Record<string, unknown>>({
               </button>
             </div>
           </div>
-          å
-        </Form>
+        </SForm>
       )}
     </Formik>
   )
 }
 
-export const WizardStep = ({ children }: { children: React.ReactChild[] }): React.ReactElement => (
+export const WizardStep = ({ children }: { children: React.ReactNode[] }): React.ReactElement => (
   <>{children}</>
 )
 

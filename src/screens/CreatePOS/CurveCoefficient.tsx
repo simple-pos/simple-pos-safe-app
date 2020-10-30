@@ -1,7 +1,7 @@
 import React from "react"
 import { Field } from "formik"
-import { TextInput } from "evergreen-ui"
 import { WizardStep } from "../../components/forms/MultistepWizard"
+import Input from "../../components/forms/Input"
 
 const CurveCoefficient = (): React.ReactElement => {
   return (
@@ -13,7 +13,7 @@ const CurveCoefficient = (): React.ReactElement => {
       </p>
       <label htmlFor="curveCoefficient">Curve Coefficient:</label>
       <Field
-        component={TextInput}
+        component={Input}
         name="curveCoefficient"
         id="curveCoefficient"
         step={1}
@@ -23,7 +23,6 @@ const CurveCoefficient = (): React.ReactElement => {
         On the graph below you can simulate how the SimplePOS token price might change with time
         depending on expected incoming payments.
       </p>
-      <button>Create a point of sale</button>
     </WizardStep>
   )
 }

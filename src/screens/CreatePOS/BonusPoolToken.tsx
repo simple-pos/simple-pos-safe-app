@@ -1,7 +1,7 @@
 import React from "react"
 import { Field } from "formik"
-import { TextInput } from "evergreen-ui"
 import { WizardStep } from "../../components/forms/MultistepWizard"
+import Input from "../../components/forms/Input"
 import { allowedTokens } from "../../utils/tokenList"
 
 const BonusPoolToken = (): React.ReactElement => {
@@ -21,13 +21,13 @@ const BonusPoolToken = (): React.ReactElement => {
         tokens:
       </p>
       <label htmlFor="initialRatio">Initial ratio:</label>
-      <Field component={TextInput} name="initialRatio" id="initialRatio" step={1} type="number" />
+      <Field component={Input} name="initialRatio" id="initialRatio" step={1} type="number" />
       <p>
         You need to send some ETH to exchange it for bonus tokens (we use Uniswap). Initial
         SimplePOS tokens will be minted for your Safe address in the ratio from the previous step.
       </p>
       <label htmlFor="ethValue">Value:</label>
-      <Field component={TextInput} type="number" id="ethValue" name="ethValue" step={1} />
+      <Field component={Input} type="number" id="ethValue" name="ethValue" step={1} />
     </WizardStep>
   )
 }

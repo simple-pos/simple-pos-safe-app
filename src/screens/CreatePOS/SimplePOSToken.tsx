@@ -1,6 +1,6 @@
 import React from "react"
 import { Field } from "formik"
-import { TextInput } from "evergreen-ui"
+import Input from "../../components/forms/Input"
 import { WizardStep } from "../../components/forms/MultistepWizard"
 
 const SimplePOSToken = (): React.ReactElement => {
@@ -12,11 +12,11 @@ const SimplePOSToken = (): React.ReactElement => {
         will be minted accordingly.
       </p>
       <label htmlFor="sposTokenName">SimplePOS token name:</label>
-      <Field component={TextInput} name="sposTokenName" id="sposTokenName" type="text" />
+      <Field component={Input} name="sposTokenName" id="sposTokenName" type="text" />
       <label htmlFor="sposTokenSymbol">SimplePOS token symbol:</label>
-      <Field component={TextInput} name="sposTokenSymbol" id="sposTokenSymbol" type="text" />
+      <Field component={Input} name="sposTokenSymbol" id="sposTokenSymbol" type="text" />
       <label htmlFor="commission">Commission for incoming payments:</label>
-      <Field component={TextInput} name="commission" id="commission" type="text" />
+      <Field component={Input} name="commission" id="commission" type="text" />
     </WizardStep>
   )
 }
