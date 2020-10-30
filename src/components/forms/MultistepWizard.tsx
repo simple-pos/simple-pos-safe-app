@@ -81,6 +81,8 @@ const Wizard = <V extends Record<string, unknown>>({
   )
 }
 
-export const WizardStep = ({ children }: { children: React.ReactNode }): React.ReactNode => children
+export const WizardStep = ({ children }: { children: React.ReactChild[] }): React.ReactElement => (
+  <>{children}</>
+)
 
 export default Wizard
