@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { BackButton } from "evergreen-ui"
+import { BackButton, Pane } from "evergreen-ui"
 // import { useSafe } from "@rmeissner/safe-apps-react-sdk"
 
 import Wizard from "../../components/forms/MultistepWizard"
@@ -10,13 +10,11 @@ import CurveCoefficient from "./CurveCoefficient"
 
 const Container = styled.div`
   margin-bottom: 2rem;
-  width: 100%;
-  max-width: 480px;
-
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const SBackBtn = styled(BackButton)`
@@ -48,11 +46,13 @@ const CreatePOS = ({ back }: OwnProps): React.ReactElement => {
 
   return (
     <Container>
-      <Wizard<CreatePOSFormValues> onSubmit={submitHandler} initialValues={INITIAL_VALUES}>
-        <BonusPoolToken />
-        <SimplePOSToken />
-        <CurveCoefficient />
-      </Wizard>
+      <Pane width={400}>
+        <Wizard<CreatePOSFormValues> onSubmit={submitHandler} initialValues={INITIAL_VALUES}>
+          <BonusPoolToken />
+          <SimplePOSToken />
+          <CurveCoefficient />
+        </Wizard>
+      </Pane>
       <SBackBtn onClick={back} />
     </Container>
   )

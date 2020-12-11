@@ -10,9 +10,10 @@ const GlobalStyle = createGlobalStyle`
        margin: 0px;
        padding: 0px;
        font-family: 'Montserrat';
+       background-color: #F9F9FB;
     }
 
-    input, textarea, select { font-family:inherit; }
+    input, textarea, select { font-family: inherit; }
 
     #root {
         height: 100%;
