@@ -1,8 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import { BackButton, Pane } from "evergreen-ui"
-// import { useSafe } from "@rmeissner/safe-apps-react-sdk"
 
+import { INITIAL_VALUES, CreatePOSFormValues } from "./formValues"
 import Wizard from "../../components/forms/MultistepWizard"
 import BonusPoolToken from "./BonusPoolToken"
 import SimplePOSToken from "./SimplePOSToken"
@@ -26,18 +26,6 @@ const SBackBtn = styled(BackButton)`
 type OwnProps = {
   back: () => void
 }
-
-const INITIAL_VALUES = {
-  curveCoefficient: "1",
-  sposTokenName: "",
-  sposTokenSymbol: "",
-  commission: "",
-  exchangeToken: "0xc7ad46e0b8a400bb3c915120d284aafba8fc4735",
-  initialRatio: "",
-  ethValue: "",
-} as const
-
-type CreatePOSFormValues = typeof INITIAL_VALUES
 
 const CreatePOS = ({ back }: OwnProps): React.ReactElement => {
   const submitHandler = (val: CreatePOSFormValues): void => {

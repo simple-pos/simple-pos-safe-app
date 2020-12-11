@@ -62,35 +62,39 @@ const Wizard = <V extends Record<string, unknown>>({
 
   return (
     <Formik initialValues={snapshot} onSubmit={handleSubmit}>
-      {(formik) => (
-        <SForm>
-          <Pane display="flex" width="100%" height={40} justifyContent="flex-start">
-            <Heading size={600}>
-              Step {stepNumber + 1} of {totalSteps}
-            </Heading>
-          </Pane>
-          {step}
-          <Pane
-            display="flex"
-            width="100%"
-            justifyContent="flex-end"
-            padding={16}
-            borderBottomLeftRadius={3}
-            borderBottomRightRadius={3}
-          >
-            <Pane>
-              {stepNumber > 0 && (
-                <Button marginRight={16} onClick={() => previous(formik.values)} type="button">
-                  Previous
-                </Button>
-              )}
-              <Button appearance="primary" disabled={formik.isSubmitting} type="submit">
-                {isLastStep ? "Submit" : "Next"}
-              </Button>
+      {(formik) => {
+        const stepWithProps = React.cloneElement(step, { values: formik.values })
+
+        return (
+          <SForm>
+            <Pane display="flex" width="100%" height={40} justifyContent="flex-start">
+              <Heading size={600}>
+                Step {stepNumber + 1} of {totalSteps}
+              </Heading>
             </Pane>
-          </Pane>
-        </SForm>
-      )}
+            {stepWithProps}
+            <Pane
+              display="flex"
+              width="100%"
+              justifyContent="flex-end"
+              padding={16}
+              borderBottomLeftRadius={3}
+              borderBottomRightRadius={3}
+            >
+              <Pane>
+                {stepNumber > 0 && (
+                  <Button marginRight={16} onClick={() => previous(formik.values)} type="button">
+                    Previous
+                  </Button>
+                )}
+                <Button appearance="primary" disabled={formik.isSubmitting} type="submit">
+                  {isLastStep ? "Submit" : "Next"}
+                </Button>
+              </Pane>
+            </Pane>
+          </SForm>
+        )
+      }}
     </Formik>
   )
 }
