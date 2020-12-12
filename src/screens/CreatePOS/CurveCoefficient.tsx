@@ -14,7 +14,13 @@ type Props = {
 const CurveCoefficient = ({ values }: Props): React.ReactElement => {
   // @ts-expect-error this is passed from multistep, needs a fix
   const { ethValue, initialRatio, commission, curveCoefficient } = values
-  const graphData = calculateGraphValues(ethValue, initialRatio, curveCoefficient, commission, 1000)
+  const graphData = calculateGraphValues(
+    ethValue,
+    initialRatio,
+    parseFloat(curveCoefficient),
+    parseFloat(commission),
+    1000,
+  )
   console.log({ graphData })
   return (
     <WizardStep>
