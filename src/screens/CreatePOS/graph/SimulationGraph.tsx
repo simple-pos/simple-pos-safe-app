@@ -1,6 +1,6 @@
 import React from "react"
 import { XAxis, YAxis, CartesianGrid, LineChart, Line, Legend } from "recharts"
-import { GraphPoint } from "./utils/calculations"
+import { GraphPoint } from "./calculations"
 
 type Props = {
   data: GraphPoint[]

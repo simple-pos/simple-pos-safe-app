@@ -38,6 +38,7 @@ const CreatePOS = ({ back }: OwnProps): React.ReactElement => {
         <Wizard<CreatePOSFormValues> onSubmit={submitHandler} initialValues={INITIAL_VALUES}>
           <BonusPoolToken />
           <SimplePOSToken />
+          {/* @ts-expect-error component props type expects values prop, but it's injected inside Wizard  */}
           <CurveCoefficient />
         </Wizard>
       </Pane>

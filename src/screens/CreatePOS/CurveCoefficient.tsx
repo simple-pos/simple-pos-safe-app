@@ -3,20 +3,19 @@ import { Field } from "formik"
 import { Text, Pane } from "evergreen-ui"
 import { WizardStep } from "../../components/forms/MultistepWizard"
 import Input from "../../components/forms/Input"
-import SimulationGraphs from "./SimulationGraphs"
+import SimulationGraphs from "./graph/SimulationGraph"
 import { CreatePOSFormValues } from "./formValues"
-import { calculateGraphValues } from "./utils/calculations"
+import { calculateGraphValues } from "./graph/calculations"
 
 type Props = {
-  values?: CreatePOSFormValues
+  values: CreatePOSFormValues
 }
 
 const CurveCoefficient = ({ values }: Props): React.ReactElement => {
-  // @ts-expect-error this is passed from multistep, needs a fix
   const { ethValue, initialRatio, commission, curveCoefficient } = values
   const graphData = calculateGraphValues(
-    ethValue,
-    initialRatio,
+    parseFloat(ethValue),
+    parseFloat(initialRatio),
     parseFloat(curveCoefficient),
     parseFloat(commission),
     1000,

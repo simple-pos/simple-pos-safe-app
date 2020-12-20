@@ -37,7 +37,6 @@ const Wizard = <V extends Record<string, unknown>>({
   const isLastStep = stepNumber === totalSteps - 1
 
   const next = (values: V) => {
-    console.log("next", { values })
     setSnapshot(values)
     setStepNumber(Math.min(stepNumber + 1, totalSteps - 1))
   }
