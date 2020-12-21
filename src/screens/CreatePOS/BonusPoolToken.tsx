@@ -47,7 +47,7 @@ const BonusPoolToken = (): React.ReactElement => {
           type="number"
           id="ethValue"
           name="ethValue"
-          step={1}
+          step={0.01}
           required
           label="Value"
           marginTop="8"

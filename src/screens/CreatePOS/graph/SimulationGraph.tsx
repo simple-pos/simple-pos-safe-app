@@ -4,23 +4,22 @@ import { GraphPoint } from "./calculations"
 
 type Props = {
   data: GraphPoint[]
+  dataKey: keyof GraphPoint
 }
 
-const SimulationGraph = ({ data }: Props): React.ReactElement => {
+const SimulationGraph = ({ data, dataKey }: Props): React.ReactElement => {
   return (
     <LineChart
       width={600}
-      height={300}
+      height={150}
       data={data}
       margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
     >
-      <XAxis dataKey="name" />
+      <XAxis dataKey="payment" interval={99} />
       <YAxis />
       <CartesianGrid strokeDasharray="3 3" />
       <Legend />
-      <Line type="monotone" dataKey="pool" stroke="#8884d8" activeDot={{ r: 8 }} />
-      <Line type="monotone" dataKey="price" stroke="#82ca9d" />
-      <Line type="monotone" dataKey="tokens" stroke="#413f2d" />
+      <Line type="monotone" dataKey={dataKey} stroke="#8884d8" />
     </LineChart>
   )
 }

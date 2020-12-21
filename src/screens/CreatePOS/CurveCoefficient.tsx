@@ -3,7 +3,7 @@ import { Field } from "formik"
 import { Text, Pane } from "evergreen-ui"
 import { WizardStep } from "../../components/forms/MultistepWizard"
 import Input from "../../components/forms/Input"
-import SimulationGraphs from "./graph/SimulationGraph"
+import SimulationGraph from "./graph/SimulationGraph"
 import { CreatePOSFormValues } from "./formValues"
 import { calculateGraphValues } from "./graph/calculations"
 
@@ -18,7 +18,7 @@ const CurveCoefficient = ({ values }: Props): React.ReactElement => {
     parseFloat(initialRatio),
     parseFloat(curveCoefficient),
     parseFloat(commission),
-    1000,
+    500,
   )
   console.log({ graphData })
   return (
@@ -34,7 +34,7 @@ const CurveCoefficient = ({ values }: Props): React.ReactElement => {
           name="curveCoefficient"
           id="curveCoefficient"
           label="Curve Coefficient"
-          step={1}
+          step={0.1}
           type="number"
           required
           marginTop={8}
@@ -43,7 +43,9 @@ const CurveCoefficient = ({ values }: Props): React.ReactElement => {
           On the graph below you can simulate how the SimplePOS token price might change with time
           depending on expected incoming payments.
         </Text>
-        <SimulationGraphs data={graphData} />
+        <SimulationGraph data={graphData} dataKey="pool" />
+        <SimulationGraph data={graphData} dataKey="price" />
+        <SimulationGraph data={graphData} dataKey="tokens" />
       </Pane>
     </WizardStep>
   )

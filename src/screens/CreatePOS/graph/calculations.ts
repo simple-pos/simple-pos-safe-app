@@ -14,7 +14,7 @@ export const getRandomPaymentFees = (amount: number, commission: number): number
   return payments
 }
 
-export type GraphPoint = { pool: number; price: number; tokens: number }
+export type GraphPoint = { payment: number; pool: number; price: number; tokens: number }
 
 export const calculateGraphValues = (
   ethValue: number,
@@ -27,24 +27,29 @@ export const calculateGraphValues = (
   const initialTokenSupply = incentivizationPool * bonusTokenRatio
   const paymentFees = getRandomPaymentFees(paymentsAmount, commission)
 
-  const graph = [
+  const graph: GraphPoint[] = [
     {
+      payment: 0,
       pool: incentivizationPool,
       tokens: initialTokenSupply,
       price: incentivizationPool / initialTokenSupply,
     },
   ]
-  for (let i = 1; i < paymentsAmount; i++) {
-    const { pool, price, tokens } = graph[i - 1]
+  for (let i = 0; i < paymentsAmount; i++) {
+    const { pool, tokens } = graph[i]
 
     const invariant = pool / tokens
-    const curveFee = paymentFees[i - 1] * curveCoefficient
-    const newIdpForInvariant = pool + paymentFees[i - 1] - curveFee
+    const curveFee = paymentFees[i] * curveCoefficient
+    const newIdpForInvariant = pool + paymentFees[i] - curveFee
     const tokensToMint = newIdpForInvariant / invariant - tokens
-    console.log({ tokensToMint, newIdpForInvariant, invariant, curveFee })
+
+    const newPool = pool + paymentFees[i]
+    const newTokenSupply = tokens + tokensToMint
+
     graph.push({
-      pool: pool + paymentFees[i - 1],
-      price: newIdpForInvariant / tokens + tokensToMint,
+      payment: i + 1,
+      pool: newPool,
+      price: newPool / newTokenSupply,
       tokens: tokens + tokensToMint,
     })
   }
