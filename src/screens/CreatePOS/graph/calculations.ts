@@ -27,7 +27,7 @@ export const calculateGraphValues = (
   const initialTokenSupply = incentivizationPool * bonusTokenRatio
   const paymentFees = getRandomPaymentFees(paymentsAmount, commission)
 
-  const graph: GraphPoint[] = [
+  const simulation: GraphPoint[] = [
     {
       payment: 0,
       pool: incentivizationPool,
@@ -36,7 +36,7 @@ export const calculateGraphValues = (
     },
   ]
   for (let i = 0; i < paymentsAmount; i++) {
-    const { pool, tokens } = graph[i]
+    const { pool, tokens } = simulation[i]
 
     const invariant = pool / tokens
     const curveFee = paymentFees[i] * curveCoefficient
@@ -46,12 +46,17 @@ export const calculateGraphValues = (
     const newPool = pool + paymentFees[i]
     const newTokenSupply = tokens + tokensToMint
 
-    graph.push({
+    simulation.push({
       payment: i + 1,
       pool: newPool,
       price: newPool / newTokenSupply,
       tokens: tokens + tokensToMint,
     })
+  }
+
+  const graph = []
+  for (let i = 0; i < simulation.length; i += 1000) {
+    graph.push(simulation[i])
   }
 
   return graph

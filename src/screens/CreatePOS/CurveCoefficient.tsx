@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { Field } from "formik"
 import { Text, Pane } from "evergreen-ui"
 import { WizardStep } from "../../components/forms/MultistepWizard"
@@ -11,16 +11,24 @@ type Props = {
   values: CreatePOSFormValues
 }
 
+// this has to be a multiple of 1000 because only every 1000 point will be added to the graph
+// because of performance concerns
+const SIMULATION_PAYMENTS_AMOUNT = 30000
+
 const CurveCoefficient = ({ values }: Props): React.ReactElement => {
   const { ethValue, initialRatio, commission, curveCoefficient } = values
-  const graphData = calculateGraphValues(
-    parseFloat(ethValue),
-    parseFloat(initialRatio),
-    parseFloat(curveCoefficient),
-    parseFloat(commission),
-    500,
+  const graphData = useMemo(
+    () =>
+      calculateGraphValues(
+        parseFloat(ethValue),
+        parseFloat(initialRatio),
+        parseFloat(curveCoefficient),
+        parseFloat(commission),
+        SIMULATION_PAYMENTS_AMOUNT,
+      ),
+    [ethValue, initialRatio, curveCoefficient, commission],
   )
-  console.log({ graphData })
+
   return (
     <WizardStep>
       <Pane height={500} display="flex" flexDirection="column">

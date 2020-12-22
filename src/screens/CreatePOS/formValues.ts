@@ -1,5 +1,5 @@
 export const INITIAL_VALUES = {
-  curveCoefficient: "1",
+  curveCoefficient: "0.5",
   sposTokenName: "",
   sposTokenSymbol: "",
   commission: "",
