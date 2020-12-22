@@ -34,7 +34,8 @@ const SimplePOSToken = (): React.ReactElement => {
           component={Input}
           name="commission"
           id="commission"
-          type="text"
+          type="number"
+          step={0.01}
           label="Commission for incoming payments"
           required
         />

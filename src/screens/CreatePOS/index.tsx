@@ -34,7 +34,7 @@ const CreatePOS = ({ back }: OwnProps): React.ReactElement => {
 
   return (
     <Container>
-      <Pane width={400}>
+      <Pane maxWidth={900}>
         <Wizard<CreatePOSFormValues> onSubmit={submitHandler} initialValues={INITIAL_VALUES}>
           <BonusPoolToken />
           <SimplePOSToken />
