@@ -7,6 +7,7 @@ import Wizard from "../../components/forms/MultistepWizard"
 import BonusPoolToken from "./BonusPoolToken"
 import SimplePOSToken from "./SimplePOSToken"
 import CurveCoefficient from "./CurveCoefficient"
+import { createPOS } from "../../api/pos"
 
 const Container = styled.div`
   margin-bottom: 2rem;
@@ -29,7 +30,7 @@ type OwnProps = {
 
 const CreatePOS = ({ back }: OwnProps): React.ReactElement => {
   const submitHandler = (val: CreatePOSFormValues): void => {
-    console.log(val)
+    createPOS()
   }
 
   return (
