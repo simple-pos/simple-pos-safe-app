@@ -2,6 +2,8 @@ import * as ethers from "ethers"
 import SimplePOSFactory from "../contracts/SimplePOSFactory.json"
 import { provider } from "./provider"
 
+const SPOS_FACTORY_ADDRESS_RINKEBY = "0xF8501781f5B13288f878B87290D758A9301d2920"
+
 const getPOSDeploymentData = (
   exchangeAddress: string,
   curveCoefficient: number,
@@ -10,7 +12,7 @@ const getPOSDeploymentData = (
   sposTokenName: string,
   sposTokenSymbol: string,
 ): string => {
-  const contract = new ethers.Contract("", SimplePOSFactory.abi, provider)
+  const contract = new ethers.Contract(SPOS_FACTORY_ADDRESS_RINKEBY, SimplePOSFactory.abi, provider)
   const txData = contract.interface.encodeFunctionData("createPOS", [
     exchangeAddress,
     sposTokenName,
@@ -23,4 +25,4 @@ const getPOSDeploymentData = (
   return txData
 }
 
-export { getPOSDeploymentData }
+export { getPOSDeploymentData, SPOS_FACTORY_ADDRESS_RINKEBY }
