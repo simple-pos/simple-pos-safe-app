@@ -9,7 +9,7 @@ import Wizard from "../../components/forms/MultistepWizard"
 import BonusPoolToken from "./BonusPoolToken"
 import SimplePOSToken from "./SimplePOSToken"
 import CurveCoefficient from "./CurveCoefficient"
-import { getPOSDeploymentData } from "../../api/pos"
+import { getPOSDeploymentData } from "../../api/posFactory"
 
 const Container = styled.div`
   margin-bottom: 2rem;
