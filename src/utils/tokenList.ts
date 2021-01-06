@@ -3,7 +3,7 @@ interface Token {
   logoUrl: string
   name: string
   decimals: number
-  exchange?: string
+  exchange: string
 }
 
 const allowedTokens: Token[] = [
@@ -17,4 +17,7 @@ const allowedTokens: Token[] = [
   },
 ]
 
-export { allowedTokens }
+const getUniswapExchangeAddress = (tokenAddress: string): string | undefined =>
+  allowedTokens.find(({ address }) => address === tokenAddress)?.exchange
+
+export { allowedTokens, getUniswapExchangeAddress }

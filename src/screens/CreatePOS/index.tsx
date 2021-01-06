@@ -9,7 +9,8 @@ import Wizard from "../../components/forms/MultistepWizard"
 import BonusPoolToken from "./BonusPoolToken"
 import SimplePOSToken from "./SimplePOSToken"
 import CurveCoefficient from "./CurveCoefficient"
-import { getPOSDeploymentData } from "../../api/posFactory"
+import { getPOSDeploymentData, SPOS_FACTORY_ADDRESS_RINKEBY } from "../../api/posFactory"
+import { getUniswapExchangeAddress } from "../../utils/tokenList"
 
 const Container = styled.div`
   margin-bottom: 2rem;
@@ -34,8 +35,14 @@ const CreatePOS = ({ back }: OwnProps): React.ReactElement => {
   const { sdk } = useSafeAppsSDK()
 
   const submitHandler = (val: CreatePOSFormValues): void => {
+    const tokenExchangeAddress = getUniswapExchangeAddress(val.exchangeToken)
+
+    if (!tokenExchangeAddress) {
+      throw new Error("Couldn't find an exchange for selected token")
+    }
+
     const deploymentData = getPOSDeploymentData(
-      "0x0000000000000000000000000000000000000000",
+      tokenExchangeAddress,
       parseFloat(val.curveCoefficient),
       parseFloat(val.commission),
       parseFloat(val.initialRatio),
@@ -44,8 +51,8 @@ const CreatePOS = ({ back }: OwnProps): React.ReactElement => {
     )
     const txs: Transaction[] = [
       {
-        to: "0x0000000000000000000000000000000000000000",
-        value: val.ethValue,
+        to: SPOS_FACTORY_ADDRESS_RINKEBY,
+        value: (+val.ethValue * 10 ** 18).toString(),
         data: deploymentData,
       },
     ]
